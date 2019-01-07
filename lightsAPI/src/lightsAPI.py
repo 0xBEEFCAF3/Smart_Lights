@@ -118,7 +118,7 @@ class lightsAPI:
                 self.set_blue_light(100)
 
 	def map_rbg_pwm(self, rgb):
-		return  (float(rgb - 0) / float(255-0) ) * (100-0) + 0
+		return  (float(int(rgb) - 0) / float(255-0) ) * (100-0) + 0
 
 	def set_duty_cycle(self, r, g, b):
 		print(self.map_rbg_pwm(r),self.map_rbg_pwm(g),self.map_rbg_pwm(b))

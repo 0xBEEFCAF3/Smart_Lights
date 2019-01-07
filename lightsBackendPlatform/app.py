@@ -18,3 +18,26 @@ def greenify():
 	lightsAPI.greenify_lights()
 	return "200 OK"
 
+@app.route("/blueify")
+def blueify():
+        lightsAPI.blueify_lights()
+        return "200 OK"
+
+@app.route("/redify")
+def redify():
+        lightsAPI.redify_lights()
+        return "200 OK"
+
+@app.route("/rgb/<r>/<g>/<b>")
+def rgb(r, g, b):
+        lightsAPI.set_duty_cycle(r, g, b)
+        return "200 OK"
+
+@app.route("/off")
+def off():
+        lightsAPI.clean_up()
+        return "200 OK"
+@app.route("/on")
+def on():
+	lightsAPI.init_lights()
+	return "200 OK"
