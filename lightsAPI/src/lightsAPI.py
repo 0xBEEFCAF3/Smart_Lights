@@ -33,7 +33,7 @@ class lightsAPI:
 		g = 0
 		b = 0
 		FADE_SPEED = 0.05
-
+		"""
 		for r in range(0,255):
 			self.set_all_colors(r,g,b)
 			time.sleep(FADE_SPEED)
@@ -41,29 +41,29 @@ class lightsAPI:
 
 		for b in range(0,255):
                         self.set_all_colors(r,g,b)
-                        time.sleep(FADE_SPEED)
-			b -= 1
+			time.sleep(FADE_SPEED)
+                        b -= 1
 
 		for g in range(0,255):
                         self.set_all_colors(r,g,b)
-                        time.sleep(FADE_SPEED)
-			g += 1
+			time.sleep(FADE_SPEED)
+                        g += 1
 
 		for r in range(0,255):
                         self.set_all_colors(r,g,b)
-                        time.sleep(FADE_SPEED)
-			r -= 1
+			time.sleep(FADE_SPEED)
+                        r -= 1
 
 		for b in range(0,255):
                         self.set_all_colors(r,g,b)
-                        time.sleep(FADE_SPEED)
-			b += 1
+			time.sleep(FADE_SPEED)
+                        b += 1
 
 		for g in range(255,0):
                         self.set_all_colors(r,g,b)
-                        time.sleep(FADE_SPEED)
-			g -= 1
-
+			time.sleep(FADE_SPEED)
+                        g -= 1
+		"""
 	def alternative_rainbow(self):
 		r = 0
 		g = 0
@@ -73,8 +73,8 @@ class lightsAPI:
 
 		while( r < 255):
 			self.set_duty_cycle(r,g,b)
-                        time.sleep(FADE_SPEED)
-                        r += 1
+			time.sleep(FADE_SPEED)
+			r += 1
 
 		while( b > 0):
                         self.set_duty_cycle(r,g,b)
@@ -127,13 +127,13 @@ class lightsAPI:
 		self.pwm_green.ChangeDutyCycle(self.map_rbg_pwm(g))
 
 	def init_lights(self):
-		GPIO.setmode(self.PIN_TYPE)
+                GPIO.setmode(self.PIN_TYPE)
                 ##Set up pins as output
                 GPIO.setup(self.red_pin, GPIO.OUT)
                 GPIO.setup(self.blue_pin, GPIO.OUT)
                 GPIO.setup(self.green_pin, GPIO.OUT)
 
-		self.pwm_red = GPIO.PWM(self.red_pin, self.DEFAULT_PWM_HZ)
+                self.pwm_red = GPIO.PWM(self.red_pin, self.DEFAULT_PWM_HZ)
                 self.pwm_red.start(self.red_val)
                 self.pwm_blue = GPIO.PWM(self.blue_pin, self.DEFAULT_PWM_HZ)
                 self.pwm_blue.start(self.blue_val)
@@ -141,20 +141,20 @@ class lightsAPI:
                 self.pwm_green.start(self.green_val)
 
 	def clean_up(self):
-		GPIO.cleanup()
-		self.pwm_blue.stop()
-		self.pwm_green.stop()
-		self.pwm_red.stop()
+                GPIO.cleanup()
+                self.pwm_blue.stop()
+                self.pwm_green.stop()
+                self.pwm_red.stop()
 
 
 
 if __name__ == "__main__":
 	print("Ready to go!")
-	lightsAPI = lightsAPI(7,5,3)
+#	lightsAPI = lightsAPI(7,5,3)
 
 #	lightsAPI.alternative_rainbow()
-	lightsAPI.set_all_colors(255,165,0)
-	time.sleep(2)
-	lightsAPI.alternative_rainbow()
-	lightsAPI.clean_up()
+#	lightsAPI.set_all_colors(255,165,0)
+#	time.sleep(2)
+#	lightsAPI.alternative_rainbow()
+#	lightsAPI.clean_up()
 
