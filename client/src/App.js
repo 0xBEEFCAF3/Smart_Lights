@@ -104,6 +104,7 @@ class App extends Component {
       <div className="App">
          <div className="page-header"> <h1> Welcome to SmartLights </h1></div>
          <div className="container picker">
+	  <span> <b> R : {this.state.color.r} | G : {this.state.color.g} | B : {this.state.color.b} </b> </span>
           <div>
             <div style={ styles.swatch } onClick={ this.handleClick }>
               <div style={ styles.color } />

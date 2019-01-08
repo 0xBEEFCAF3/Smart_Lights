@@ -31,7 +31,8 @@ def redify():
 @app.route("/rgb/<r>/<g>/<b>")
 def rgb(r, g, b):
         lightsAPI.set_duty_cycle(r, g, b)
-        return "200 OK"
+#        lightsAPI.set_all_colors(r,g,b)
+	return "200 OK"
 
 @app.route("/off")
 def off():

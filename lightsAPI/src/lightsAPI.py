@@ -1,5 +1,6 @@
 import RPi.GPIO as GPIO
 import time
+from math import ceil
 
 class lightsAPI:
 	red_pin = -1
@@ -78,7 +79,7 @@ class lightsAPI:
 
 		while( b > 0):
                         self.set_duty_cycle(r,g,b)
-                        time.sleep(FADE_SPEED)
+			time.sleep(FADE_SPEED)
                         b -= 1
 
 		while( g < 255):
@@ -118,13 +119,17 @@ class lightsAPI:
                 self.set_blue_light(100)
 
 	def map_rbg_pwm(self, rgb):
-		return  (float(int(rgb) - 0) / float(255-0) ) * (100-0) + 0
+		return  100 - ceil((float(int(rgb) - 0) / float(255-0) ) * (100-0))
 
 	def set_duty_cycle(self, r, g, b):
-		print(self.map_rbg_pwm(r),self.map_rbg_pwm(g),self.map_rbg_pwm(b))
-		self.pwm_red.ChangeDutyCycle(self.map_rbg_pwm(r))
-		self.pwm_blue.ChangeDutyCycle(self.map_rbg_pwm(b))
-		self.pwm_green.ChangeDutyCycle(self.map_rbg_pwm(g))
+		print(int(r),int(g),int(b),self.map_rbg_pwm(r),self.map_rbg_pwm(g),self.map_rbg_pwm(b))
+		self.set_red_light(self.map_rbg_pwm(r))
+		self.set_green_light(100)
+		self.set_blue_light(self.map_rbg_pwm(b))
+
+		#self.pwm_red.ChangeDutyCycle(0)
+		#self.pwm_blue.ChangeDutyCycle(0)
+		#self.pwm_green.ChangeDutyCycle(100)
 
 	def init_lights(self):
                 GPIO.setmode(self.PIN_TYPE)
