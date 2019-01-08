@@ -8,6 +8,8 @@ import './App.css';
 
 class App extends Component {
   state = {
+    BE_URL:"192.168.1.5",
+    BE_port:5000,
     displayColorPicker: false,
     color: {
       r: '241',
@@ -37,8 +39,8 @@ class App extends Component {
     const r = this.state.color.r;
     const g = this.state.color.g;
     const b = this.state.color.b;
-
-    axios.get('http://localhost:5000/rgb/'+r+'/'+g+'/'+b)
+    console.log('http://'+this.state.BE_URL+':'+this.state.BE_port);
+    axios.get('http://'+this.state.BE_URL+':'+this.state.BE_port+'/rgb/'+r+'/'+g+'/'+b)
       .then(function (response) {
         console.log(response);
       })
@@ -49,7 +51,8 @@ class App extends Component {
   }
 
   handleOn = () => {
-    axios.get('http://localhost:5000/on')
+    console.log('http://'+this.state.BE_URL+':'+this.state.BE_port);
+    axios.get('http://'+this.state.BE_URL+':'+this.state.BE_port+'/on')
       .then(function (response) {
         console.log(response);
       })
@@ -60,7 +63,85 @@ class App extends Component {
   }
 
   handleOff = () => {
-    axios.get('http://localhost:5000/off')
+    console.log('http://'+this.state.BE_URL+':'+this.state.BE_port);
+    axios.get('http://'+this.state.BE_URL+':'+this.state.BE_port+'/off')
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }
+
+  handleBlueify = () => {
+    axios.get('http://'+this.state.BE_URL+':'+this.state.BE_port+'/blueify')
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }
+
+  handleRedify = () => {
+    axios.get('http://'+this.state.BE_URL+':'+this.state.BE_port+'/redify')
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }
+
+  handleGreenify = () => {
+    axios.get('http://'+this.state.BE_URL+':'+this.state.BE_port+'/greenify')
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }
+
+  handleYellowify = () => {
+    axios.get('http://'+this.state.BE_URL+':'+this.state.BE_port+'/yellowify')
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }
+
+  handleMagentify = () => {
+    axios.get('http://'+this.state.BE_URL+':'+this.state.BE_port+'/magentify')
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }
+
+  handleCyanify = () => {
+    axios.get('http://'+this.state.BE_URL+':'+this.state.BE_port+'/cyanify')
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+
+  }
+
+  handleRainbow = () => {
+    axios.get('http://'+this.state.BE_URL+':'+this.state.BE_port+'/rainbow')
       .then(function (response) {
         console.log(response);
       })
@@ -119,7 +200,23 @@ class App extends Component {
           <button className="btn btn-primary" onClick={ this.handleSetColor }> Set Color </button>
           <button className="btn btn-primary" onClick={ this.handleOn }> ON </button>
           <button className="btn btn-primary" onClick={ this.handleOff }> OFF </button>
-          </div>
+        </div>
+        <br />
+        <div className="btn-group">
+          <button className="btn btn-success" onClick={ this.handleGreenify }> Greenify </button>
+          <button className="btn btn-danger" onClick={ this.handleRedify }> Redify </button>
+          <button className="btn btn-info" onClick={ this.handleBlueify }> Blueify </button>
+        </div>
+        <br />
+        <div className="btn-group">
+          <button className="btn btn-primary" onClick={ this.handleYellowify }> Yellowify </button>
+          <button className="btn btn-primary" onClick={ this.handleMagentify }> Magentify </button>
+          <button className="btn btn-primary" onClick={ this.handleCyanify }> Cyanify </button>
+        </div>
+        <br />
+        <div className="btn-group">
+          <button className="btn btn-primary" onClick={ this.handleRainbow }> Rainbow </button>
+        </div>
       </div>
     );
   }
