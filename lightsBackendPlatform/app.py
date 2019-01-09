@@ -1,5 +1,6 @@
 import sys
 from flask import Flask
+from flask import render_template
 sys.path.insert(0, '../lightsAPI/src')
 from lightsAPI import lightsAPI
 from flask_cors import CORS, cross_origin
@@ -13,8 +14,9 @@ lightsAPI = lightsAPI(7,5,3)
 
 @app.route("/")
 @cross_origin()
-def ping():
-    return "Pong!"
+def index():
+	print("hit end point")
+	return render_template('index.html')
 
 
 @app.route("/greenify")
@@ -35,12 +37,33 @@ def redify():
         lightsAPI.redify_lights()
         return "200 OK"
 
+@app.route("/yellowify")
+@cross_origin()
+def yellowify():
+        lightsAPI.yellowify_lights()
+        return "200 OK"
+
+@app.route("/magentify")
+@cross_origin()
+def magentify():
+        lightsAPI.magentify_lights()
+        return "200 OK"
+
+@app.route("/cyanify")
+@cross_origin()
+def cyanify():
+        lightsAPI.cyanify_lights()
+        return "200 OK"
+
+
 @app.route("/rgb/<r>/<g>/<b>")
 @cross_origin()
 def rgb(r, g, b):
         lightsAPI.set_duty_cycle(r, g, b)
 #        lightsAPI.set_all_colors(r,g,b)
 	return "200 OK"
+
+
 
 @app.route("/off")
 @cross_origin()
