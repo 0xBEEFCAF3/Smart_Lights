@@ -59,7 +59,6 @@ def cyanify():
 @app.route("/rgb/<r>/<g>/<b>")
 #@cross_origin()
 def rgb(r, g, b):
-#        lightsAPI.set_duty_cycle(r, g, b)
         lightsAPI.set_green_light(g)
         lightsAPI.set_red_light(r)
         lightsAPI.set_blue_light(b)
@@ -69,7 +68,12 @@ def rgb(r, g, b):
 @app.route("/rainbow")
 #@cross_origin()
 def rainbow():
-        lightsAPI.normal_rainbow()
+        lightsAPI.rainbow_lights(0.05)
+        return "200 OK"
+
+@app.route("/exrainbow")
+def exrainbow():
+        lightsAPI.rainbow_lights(1)
         return "200 OK"
 
 @app.route("/off")
