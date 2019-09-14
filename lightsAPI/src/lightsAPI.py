@@ -70,9 +70,9 @@ class lightsAPI:
 #                GPIO.setwarnings(False) 
 #                GPIO.setmode(self.PIN_TYPE)
                 print("In init lights", self.red_pin, self.blue_pin, self.green_pin)
-                self.pi.set_PWM_dutycycle(self.red_pin, 0)
-                self.pi.set_PWM_dutycycle(self.blue_pin, 0)
-                self.pi.set_PWM_dutycycle(self.green_pin, 0)
+                self.pi.set_PWM_dutycycle(self.red_pin, 255)
+                self.pi.set_PWM_dutycycle(self.blue_pin, 255)
+                self.pi.set_PWM_dutycycle(self.green_pin, 255)
                 ##Set up pins as output
 #                GPIO.setup(self.red_pin, GPIO.OUT)
 #                GPIO.setup(self.blue_pin, GPIO.OUT)
@@ -86,16 +86,9 @@ class lightsAPI:
 #                self.pwm_green.start(self.green_val)
 
 	def clean_up(self):
-#                GPIO.cleanup()
-                self.red_val = 0
-                self.blue_val = 0
-                self.green_val = 0
-                self.init_lights()
-#                self.pwm_blue.stop()
-#                self.pwm_green.stop()
-#                self.pwm_red.stop()
-
-
+		self.pi.set_PWM_dutycycle(self.red_pin, 0)
+		self.pi.set_PWM_dutycycle(self.blue_pin, 0)
+		self.pi.set_PWM_dutycycle(self.green_pin, 0)
 
 #if __name__ == "__main__":
 #	print("Ready to go!")

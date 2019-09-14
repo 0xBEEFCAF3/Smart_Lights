@@ -8,7 +8,7 @@ import './App.css';
 
 class App extends Component {
   state = {
-    BE_URL:"192.168.1.5",
+    BE_URL: window.location.hostname,
     BE_port:5000,
     displayColorPicker: false,
     color: {
@@ -148,7 +148,16 @@ class App extends Component {
       .catch(function (error) {
         console.log(error);
       });
+  }
 
+  exHandleRainbow = () => {                                                                                     
+    axios.get('http://'+this.state.BE_URL+':'+this.state.BE_port+'/exrainbow')                                  
+      .then(function (response) {                                                                               
+        console.log(response);                                                                                  
+      })                                                                                                        
+      .catch(function (error) {                                                                                   
+        console.log(error);                                                                                      
+      });                                                                                                        
   }
 
   render() {
@@ -183,7 +192,7 @@ class App extends Component {
     });
     return (
       <div className="App">
-         <div className="page-header"> <h1> Welcome to SmartLights </h1></div>
+         <div className="page-header"> <h1> Welcome to ArmLights </h1></div>
          <div className="container picker">
 	  <span> <b> R : {this.state.color.r} | G : {this.state.color.g} | B : {this.state.color.b} </b> </span>
           <div>
@@ -215,7 +224,8 @@ class App extends Component {
         </div>
         <br />
         <div className="btn-group">
-          <button className="btn btn-primary" onClick={ this.handleRainbow }> Rainbow </button>
+          <button className="btn btn-primary" onClick={ this.handleRainbow }> Vibeify </button>
+          <button className="btn btn-primary" onClick={ this.exHandleRainbow }> Extra-Vibeify </button>
         </div>
       </div>
     );
