@@ -16,6 +16,9 @@ app.config['CORS_HEADERS'] = 'Content-Type'
 lightsAPI = lightsAPI(24,5,12)
 rainbow_thread = Thread(target = lightsAPI.rainbow_lights, args=([0.005]))         
 rainbow_thread.daemon = True
+rainbow_thread_extra = Thread(target = lightsAPI.rainbow_lights, args=([0.010]))         
+rainbow_thread_extra.daemon = True
+
 
 
 @app.route("/")
@@ -89,7 +92,10 @@ def rainbow():
 @app.route("/exrainbow")
 def exrainbow():
         lightsAPI.return_to_main = False
-        lightsAPI.rainbow_lights(1)
+        #lightsAPI.rainbow_lights(1)
+        if not rainbow_thread_extra.isAlive():
+            rainbow_thread_extra.start();
+
         return "200 OK"
 
 @app.route("/off")
